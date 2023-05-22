@@ -1,8 +1,9 @@
 # sie-parser
 Read SIE files using PHP. <br><br>
 A memory efficient way to read an uploaded SIE file (Swedish Accounting File) and get information usable in a php application. The goal was that memory used should not exceed
-the current file as the current public reposit (neam/php) sadly failed on larger files. This will parse large .se files without any issues using php standard file reader.
-#
+the current file as the current public reposit (neam/php) sadly failed on larger files. This will parse large .se files without any issues using php standard file reader. 
+<br>
+<br>
 <b>Requires </b> <br>
 PHP 8.0+
 #
@@ -11,7 +12,7 @@ PHP 8.0+
 + Will parse the following flags: <br>
 #RES, #KONTO, #RAR, #UB, #IB, #FNAMN, #ORGNR
 + Character encoded to support transforming to json
-# 
+
 <b>How to use</b> <br>
 ```php
 use SieParser\Parser; 
