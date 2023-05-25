@@ -116,7 +116,10 @@ class Parser
 
             }
         }
+
+        $this->file->rewind();
         return $vouchers;
+
     }
 
 }
