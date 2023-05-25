@@ -2,6 +2,7 @@
 
 namespace SieParser;
 
+use Exception;
 use SieParser\data\Transaction;
 use SieParser\data\Voucher;
 use SieParser\types\Fnamn;
@@ -17,9 +18,15 @@ class Parser
 {
     private \SplFileObject $file;
 
+    /**
+     * @throws Exception
+     */
     public function __construct($file)
     {
         $this->file = new \SplFileObject($file);
+        if (!$this->validateFile()) {
+            throw new Exception('Not a valid SIE file.');
+        }
     }
 
     public function getOrgnr(): array
@@ -120,6 +127,15 @@ class Parser
         $this->file->rewind();
         return $vouchers;
 
+    }
+
+    public function validateFile(): bool
+    {
+        if (str_contains($this->file->getCurrentLine(), "#FLAGGA")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
