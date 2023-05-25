@@ -29,4 +29,4 @@ The above code snippet will parse your selected file. In the example you get the
 <b>To be implemented</b> <br>
 + Parse more flags
 + Parse dimensions
-+ Parse from PHP array to SE file
++ Write to SIE file from PHP objects
