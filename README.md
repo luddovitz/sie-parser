@@ -6,6 +6,11 @@ the current file as the current public reposit (neam/php) sadly failed on larger
 <br>
 <b>Requires </b> <br>
 PHP 8.0+
+<br>
+<br>
+<b>Benchmark</b>
+<br>
+File containing 29 819 vouchers is processed in 0.1 seconds with a 1.5 mb memory usage.
 #
 <b>Currently implemented features </b>
 + Open .se file
@@ -17,7 +22,7 @@ PHP 8.0+
 ```php
 use SieParser\Parser; 
 $parser = new Parser("PATH TO FILE");
-$parser->getRes()
+$parser->getRes();
 ```
 The above code snippet will parse your selected file. In the example you get the "res" flag from the file as an array. This can be encoded to json for even smaller memory footprint.
 #
