@@ -27,5 +27,6 @@ $parser->getRes();
 The above code snippet will parse your selected file. In the example you get the "res" flag from the file as an array. This can be encoded to json for even smaller memory footprint.
 #
 <b>To be implemented</b> <br>
-+ SIE validation
++ Parse more flags
++ Parse dimensions
 + Parse from PHP array to SE file
