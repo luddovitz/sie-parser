@@ -10,16 +10,16 @@ PHP 8.0+
 <b>Currently implemented features </b>
 + Open .se file
 + Will parse the following flags: <br>
-#RES, #KONTO, #RAR, #UB, #IB, #FNAMN, #ORGNR
+#RES, #KONTO, #RAR, #UB, #IB, #FNAMN, #ORGNR, #VER, #TRANS
 + Character encoded to support transforming to json
 
 <b>How to use</b> <br>
 ```php
 use SieParser\Parser; 
 $parser = new Parser("PATH TO FILE");
-$parser->parsedDocument->res
+$parser->getRes()
 ```
-The above code snippet will parse your selected file and then you call the parsedDocument object which contains all the parsed data. In the example you get the "res" flag in an associative php array.
+The above code snippet will parse your selected file. In the example you get the "res" flag from the file as an array. This can be encoded to json for even smaller memory footprint.
 #
 <b>To be implemented</b> <br>
 + SIE validation
