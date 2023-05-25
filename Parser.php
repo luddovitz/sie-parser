@@ -2,6 +2,8 @@
 
 namespace SieParser;
 
+use SieParser\data\Transaction;
+use SieParser\data\Voucher;
 use SieParser\types\Fnamn;
 use SieParser\types\Ib;
 use SieParser\types\Konto;
@@ -13,38 +15,55 @@ use SieParser\types\Ub;
 
 class Parser
 {
-    public ParsedDocument $parsedDocument;
     private \SplFileObject $file;
 
     public function __construct($file)
     {
-        $this->parsedDocument = new ParsedDocument();
         $this->file = new \SplFileObject($file);
-
-        // parse konto
-        $this->parsedDocument->konto = $this->parse(new Konto());
-
-        // parse res
-        $this->parsedDocument->res = $this->parse(new Res());
-
-        // parse ub
-        $this->parsedDocument->ub = $this->parse(new Ub());
-
-        // parse ib
-        $this->parsedDocument->ib = $this->parse(new Ib());
-
-        // parse years
-        $this->parsedDocument->rar = $this->parse(new Rar());
-
-        // parse company name
-        $this->parsedDocument->fnamn = $this->parse(new Fnamn());
-
-        // parse organization number
-        $this->parsedDocument->orgnr = $this->parse(new Orgnr());
-
     }
 
-    function parse(ParseType $parseType): array {
+    public function getOrgnr(): array
+    {
+        return $this->parse(new Orgnr());
+    }
+
+    public function getFnamn(): array
+    {
+        return $this->parse(new Fnamn());
+    }
+
+    public function getRar(): array
+    {
+        return $this->parse(new Rar());
+    }
+
+    public function getIb(): array
+    {
+        return $this->parse(new Ib());
+    }
+
+    public function getUb(): array
+    {
+        return $this->parse(new Ub());
+    }
+
+    public function getRes(): array
+    {
+        return $this->parse(new Res());
+    }
+
+    public function getVer(): array
+    {
+        return $this->parseVouchers();
+    }
+
+    public function getKonto(): array
+    {
+        return $this->parse(new Konto());
+    }
+
+    function parse(ParseType $parseType): array
+    {
 
         $parseResult = [];
 
@@ -59,6 +78,45 @@ class Parser
         $this->file->rewind();
 
         return $parseResult;
+    }
+
+    function parseVouchers(): array
+    {
+        $vouchers = [];
+        $this->file->setFlags(\SplFileObject::DROP_NEW_LINE);
+        while(!$this->file->eof()) {
+            if (str_contains($this->file->fgets(), "#VER")) {
+                $line = $this->file->current();
+                $splitLine = explode(' ', $line);
+
+                $voucher = new Voucher($splitLine[1], $splitLine[2], $splitLine[3], explode('"', $line)[1]);
+
+                // jump two lines
+                $voucherRows = [];
+                while($this->file->current() != '}') {
+                    if (str_starts_with($this->file->current(), "#TRANS")) {
+
+                        $split = explode(" ", $this->file->current());
+
+                        $amountPos = 0;
+                        foreach ($split as $key => $splitLine) {
+                            if (str_contains($splitLine, "}")) {
+                                $amountPos = $key + 1;
+                            }
+                        }
+
+                        $voucherRow = new Transaction($split[1], $split[$amountPos]);
+                        $voucherRows[] = $voucherRow;
+                    }
+                    $this->file->next();
+                }
+
+                $voucher->trans = $voucherRows;
+                $vouchers[] = $voucher;
+
+            }
+        }
+        return $vouchers;
     }
 
 }

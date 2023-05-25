@@ -1,6 +1,7 @@
 <?php
 
 namespace SieParser\types;
+use SieParser\data\Account;
 
 class Konto extends ParseType
 {
@@ -11,7 +12,7 @@ class Konto extends ParseType
         return $this->flag;
     }
 
-    function parse(array $line): array
+    function parse(array $line): Account
     {
         $accountDesc = '';
         $accountNumber = 0;
@@ -27,10 +28,7 @@ class Konto extends ParseType
         $accountDesc = trim($accountDesc);
         $accountDesc = iconv('CP437', 'UTF-8', $accountDesc);
 
-        return [
-            'number' => $accountNumber,
-            'description' => $accountDesc
-            ];
+        return new Account($accountNumber, $accountDesc);
 
     }
 }
