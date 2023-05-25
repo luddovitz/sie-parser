@@ -4,13 +4,13 @@ namespace SieParser\data;
 
 class Transaction
 {
-    public string $kontonr;
-    public string $belopp;
+    public string $account;
+    public float $amount;
 
-    public function __construct(string $kontonr, string $belopp)
+    public function __construct(string $account, string $amount)
     {
-        $this->kontonr = $kontonr;
-        $this->belopp = $belopp;
+        $this->account = $account;
+        $this->amount = $amount;
     }
 
 }

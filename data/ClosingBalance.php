@@ -6,7 +6,7 @@ class ClosingBalance
 {
     public string $year;
     public string $account;
-    public string $balance;
+    public float $balance;
     public string $quantity;
 
     public function __construct($year, $account, $balance, $quantity)
