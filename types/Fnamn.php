@@ -11,10 +11,17 @@ class Fnamn extends ParseType
         return $this->flag;
     }
 
-    function parse(array $line): array
+    function parse(array $line): array|string
     {
-        return [
-            "companyName" => $line[1]
-        ];
+        // Build a string
+        $companyName = "";
+        for ($i = 0; $i < count($line); $i++) {
+            if ($i > 0) {
+                $companyName .= " " . $line[$i];
+            }
+        }
+
+        return trim(str_replace("\"", "", $companyName));
+
     }
 }
