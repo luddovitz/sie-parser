@@ -2,7 +2,7 @@
 
 namespace SieParser\types;
 
-use SieParser\data\ClosingBalance;
+use SieParser\data\Balance;
 
 class Ub extends ParseType
 {
@@ -13,8 +13,8 @@ class Ub extends ParseType
         return $this->flag;
     }
 
-    function parse(array $line): ClosingBalance
+    function parse(array $line): Balance
     {
-        return new ClosingBalance($line[1], $line[2], $line[3], $line[4]);
+        return new Balance($line[1], $line[2], $line[3], $line[4]);
     }
 }

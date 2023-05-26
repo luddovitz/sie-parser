@@ -2,6 +2,8 @@
 
 namespace SieParser\types;
 
+use SieParser\data\Balance;
+
 class Res extends ParseType
 {
     private string $flag = "#RES";
@@ -11,15 +13,8 @@ class Res extends ParseType
         return $this->flag;
     }
 
-    function parse(array $line): array
+    function parse(array $line): Balance
     {
-
-        return [
-            'year' => $line[1],
-            'account' => $line[2],
-            'balance' => $line[3],
-            'quantity' => $line[4]
-        ];
-
+        return new Balance($line[1], $line[2], $line[3], $line[4]);
     }
 }

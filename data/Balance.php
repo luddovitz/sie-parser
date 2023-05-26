@@ -2,7 +2,7 @@
 
 namespace SieParser\data;
 
-class ClosingBalance
+class Balance
 {
     public string $year;
     public string $account;
@@ -16,4 +16,5 @@ class ClosingBalance
         $this->balance = $balance;
         $this->quantity = $quantity;
     }
+
 }
