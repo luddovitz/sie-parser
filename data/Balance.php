@@ -7,14 +7,12 @@ class Balance
     public string $year;
     public string $account;
     public float $balance;
-    public string $quantity;
 
-    public function __construct($year, $account, $balance, $quantity)
+    public function __construct($year, $account, $balance)
     {
         $this->year = $year;
         $this->account = $account;
         $this->balance = $balance;
-        $this->quantity = $quantity;
     }
 
 }

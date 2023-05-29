@@ -15,6 +15,6 @@ class Ib extends ParseType
 
     function parse(array $line): Balance
     {
-        return new Balance($line[1], $line[2], $line[3], $line[4]);
+        return new Balance($line[1], $line[2], $line[3]);
     }
 }
