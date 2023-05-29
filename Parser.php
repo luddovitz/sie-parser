@@ -101,7 +101,7 @@ class Parser
                 // jump two lines
                 $voucherRows = [];
                 while($this->file->current() != '}') {
-                    if (str_starts_with($this->file->current(), "#TRANS")) {
+                    if (str_starts_with(trim($this->file->current()), "#TRANS")) {
 
                         $split = explode(" ", $this->file->current());
 

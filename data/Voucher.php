@@ -12,8 +12,8 @@ class Voucher
 
     public function __construct(string $serie, string $vernr, string $verdatum, string $vertext)
     {
-        $this->serie = $serie;
-        $this->vernr = $vernr;
+        $this->serie = preg_replace("/[^a-zA-Z0-9]+/", "", $serie);
+        $this->vernr = preg_replace("/[^a-zA-Z0-9]+/", "", $vernr);
         $this->verdatum = $verdatum;
         $this->vertext = iconv('CP437', 'UTF-8', $vertext);
     }
