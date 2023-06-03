@@ -16,6 +16,7 @@ class Voucher
         $this->vernr = preg_replace("/[^a-zA-Z0-9]+/", "", $vernr);
         $this->verdatum = $verdatum;
         $this->vertext = iconv('CP437', 'UTF-8', $vertext);
+        $this->vertext = preg_replace("/[^a-zA-Z0-9\s]+/", "", $this->vertext);
     }
 
 }

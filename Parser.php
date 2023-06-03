@@ -96,14 +96,23 @@ class Parser
                 $line = $this->file->current();
                 $splitLine = explode(' ', $line);
 
-                $voucher = new Voucher($splitLine[1], $splitLine[2], $splitLine[3], explode('"', $line)[1]);
+                // build voucherText
+                $voucherText = "";
+                for ($i = 0; $i < count($splitLine)-1; $i++) {
+                    if ($i > 3) {
+                        $voucherText .= $splitLine[$i] . " ";
+                    }
+                }
 
-                // jump two lines
+                $voucher = new Voucher($splitLine[1], $splitLine[2], $splitLine[3], $voucherText);
+
+                // get voucher rows ("#TRANS")
                 $voucherRows = [];
                 while($this->file->current() != '}') {
                     if (str_starts_with(trim($this->file->current()), "#TRANS")) {
 
                         $split = explode(" ", $this->file->current());
+                        $split = array_values(array_filter($split));
 
                         $amountPos = 0;
                         foreach ($split as $key => $splitLine) {

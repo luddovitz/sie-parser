@@ -10,7 +10,7 @@ class Transaction
     public function __construct(string $account, string $amount)
     {
         $this->account = $account;
-        $this->amount = $amount;
+        $this->amount = floatval($amount);
     }
 
 }

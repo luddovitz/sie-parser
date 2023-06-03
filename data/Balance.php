@@ -12,7 +12,7 @@ class Balance
     {
         $this->year = $year;
         $this->account = $account;
-        $this->balance = $balance;
+        $this->balance = floatval($balance);
     }
 
 }
